@@ -26,6 +26,8 @@
 if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 	class AGU_Dashboard_Notifications {
 
+		protected const PLUGIN_SLUG = 'dashboard-notifications';
+
 		/**
 		 * Constructor
 		 */
@@ -140,7 +142,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 
 			// Enqueue CSS file
 			wp_enqueue_style(
-				'dashboard-notifications-style',
+				self::PLUGIN_SLUG . '-style',
 				plugin_dir_url( __FILE__ ) . 'resources/css/style.css',
 				[],
 				'1.0',
@@ -149,7 +151,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 
 			// Enqueue script
 			wp_enqueue_script(
-				'dashboard-notifications-script',
+				 self::PLUGIN_SLUG . '-script',
 				plugin_dir_url( __FILE__ ) . 'resources/js/script.js',
 				[],
 				'1.0',
