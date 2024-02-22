@@ -253,6 +253,23 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 
 			return false;
 		}
+
+		/**
+		 * Check if we're on the Notices page.
+		 *
+		 * @return bool
+		 * @since 1.0.1
+		 */
+		public function is_on_page() {
+			if (
+				isset( $_GET['page'] )
+				&& $_GET['page'] === 'dashboard-notices'
+			) {
+				return true;
+			}
+
+			return false;
+		}
 	}
 
 	new AGU_Dashboard_Notices();
