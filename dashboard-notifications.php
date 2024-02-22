@@ -156,18 +156,10 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 		 * @return void
 		 */
 		function enqueue_custom_scripts() {
-			// Bail, if using the URL parameter.
-			if (
-				isset( $_GET['show_notices'] )
-				&& $_GET['show_notices'] === "1"
-			) {
-				return;
-			}
-
-			// Enqueue CSS file
+			// Enqueue base CSS file
 			wp_enqueue_style(
-				self::PLUGIN_SLUG . '-style',
-				plugin_dir_url( __FILE__ ) . 'resources/css/style.css',
+				self::PLUGIN_SLUG . '-base-style',
+				plugin_dir_url( __FILE__ ) . 'resources/css/base.css',
 				[],
 				'1.0',
 				'all'
@@ -181,6 +173,24 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 				'1.0',
 				true
 			);
+
+			// Bail, if using the URL parameter.
+			if (
+				isset( $_GET['show_notices'] )
+				&& $_GET['show_notices'] === "1"
+			) {
+				return;
+			}
+
+			// Enqueue CSS file
+			wp_enqueue_style(
+				self::PLUGIN_SLUG . '-style',
+				plugin_dir_url( __FILE__ ) . 'resources/css/hide.css',
+				[],
+				'1.0',
+				'all'
+			);
+
 		}
 
 		/**
