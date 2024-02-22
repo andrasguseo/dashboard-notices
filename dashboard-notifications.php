@@ -158,7 +158,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		 * @return void
 		 */
 		public function admin_notice() {
-		if (
+			if (
 				! $this->in_url_param()
 				&& ! $this->is_on_page()
 			) {
@@ -241,10 +241,10 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		/**
 		 * Check the url parameter value.
 		 *
-		 * @return bool
 		 * @since 1.0.1
+		 * @return bool
 		 */
-		public function in_url_param(){
+		public function in_url_param() {
 			if (
 				isset( $_GET['show_notices'] )
 				&& $_GET['show_notices'] === "1"
@@ -258,8 +258,8 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		/**
 		 * Check if we're on the Notices page.
 		 *
-		 * @return bool
 		 * @since 1.0.1
+		 * @return bool
 		 */
 		public function is_on_page() {
 			if (
