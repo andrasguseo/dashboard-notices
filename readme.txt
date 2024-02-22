@@ -4,7 +4,7 @@ Donate link: https://paypal.me/guseo?country.x=CH&locale.x=en_US
 Tags: notices
 Requires at least: 5.8.6
 Tested up to: 6.4.3
-Requires PHP: 7.4
+Requires PHP: 8.0
 Stable tag: 1.1.0
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -24,6 +24,10 @@ Install and activate like any other plugin!
 * Once it has been installed or uploaded, simply visit the main plugin list and activate it
 
 == Frequently Asked Questions ==
+
+= What if there are still notices appearing after I activate the plugin? =
+
+Dashboard Notices tries its best to hide admin notices that were created by using the `admin_notices` hook according to the [official documentation](https://developer.wordpress.org/reference/hooks/admin_notices/). As a result, notices that are not following those guidelines might still show up. A later version might handle those notices. Feel free to let me know about these on the [Issues](https://github.com/andrasguseo/dashboard-notices/issues) section of the repository.
 
 = What if I experience problems? =
 
