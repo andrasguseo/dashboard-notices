@@ -29,7 +29,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 		protected const PLUGIN_SLUG = 'dashboard-notifications';
 
 		/**
-		 * Constructor
+		 * Constructor.
 		 */
 		public function __construct() {
 			add_action( 'admin_menu', [ $this, 'add_notifications_page' ] );
@@ -130,13 +130,17 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 		}
 
 		/**
-		 * Enqueue scripts and styles
+		 * Enqueue scripts and styles.
 		 *
 		 * @return void
 		 * @since 1.0.0
 		 */
 		function enqueue_custom_scripts() {
-			if ( ! is_admin() ) {
+			// Bail, if using the URL parameter.
+			if (
+				isset( $_GET['show_notices'] )
+				&& $_GET['show_notices'] === "1"
+			) {
 				return;
 			}
 
