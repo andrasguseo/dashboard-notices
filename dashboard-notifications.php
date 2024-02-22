@@ -4,7 +4,7 @@
  * Plugin URI:
  * GitHub Plugin URI: https://github.com/andrasguseo/dashboard-notices
  * Description:       The plugin hides admin notices and shows them only on a dedicated page.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Plugin Class:      AGU_Dashboard_Notices
  * Author:            Andras Guseo
  * Author URI:        https://andrasguseo.com
@@ -241,7 +241,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		/**
 		 * Check the url parameter value.
 		 *
-		 * @since 1.0.1
+		 * @since 1.1.0
 		 * @return bool
 		 */
 		public function in_url_param() {
@@ -258,7 +258,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		/**
 		 * Check if we're on the Notices page.
 		 *
-		 * @since 1.0.1
+		 * @since 1.1.0
 		 * @return bool
 		 */
 		public function is_on_page() {
