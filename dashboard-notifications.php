@@ -44,8 +44,8 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 		/**
 		 * Add an admin page for notifications.
 		 *
-		 * @return void
 		 * @since 1.0.0
+		 * @return void
 		 */
 		public function add_notifications_page() {
 			$page_title = 'Notifications <span id="notification-count" class="notification-count">0</span>';
@@ -62,8 +62,8 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 		/**
 		 * Render the notifications page.
 		 *
-		 * @return void
 		 * @since 1.0.0
+		 * @return void
 		 */
 		public function render_notifications_page() {
 			$item = $this->get_random_item();
@@ -90,13 +90,14 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 		/**
 		 * Add a body class to the notifications page.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param string $classes The list of body classes.
 		 *
 		 * @return string
-		 * @since 1.0.0
 		 */
 		public function add_body_class( $classes ) {
-			if ( isset( $_GET[ 'page' ] ) && $_GET[ 'page' ] == 'dashboard-notifications' ) {
+			if ( isset( $_GET['page'] ) && $_GET['page'] == 'dashboard-notifications' ) {
 				$classes .= ' dashboard-notifications';
 			}
 
@@ -106,10 +107,11 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 		/**
 		 * Add an entry to the admin bar.
 		 *
+		 * @since 1.0.0
+		 *
 		 * @param WP_Admin_Bar $admin_bar
 		 *
 		 * @return void
-		 * @since 1.0.0
 		 */
 		function admin_bar_item( WP_Admin_Bar $admin_bar ) {
 			if ( ! current_user_can( 'manage_options' ) ) {
@@ -117,23 +119,41 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 			}
 
 			$title = '🔔 <span id="admin-bar-notification-count" class="notification-count">0</span>';
-			$admin_bar->add_menu( [
-				'id'     => 'menu-id',
-				'parent' => 'top-secondary',
-				'group'  => null,
-				'title'  => $title,
-				'href'   => admin_url( 'admin.php?page=dashboard-notifications' ),
-				'meta'   => [
-					'title' => __( 'Notifications', 'agu-dashboard-notifications' ),
-				],
-			] );
+			$admin_bar->add_menu(
+				[
+					'id'     => 'dashboard-notifications',
+					'parent' => 'top-secondary',
+					'group'  => null,
+					'title'  => $title,
+					'href'   => admin_url( 'admin.php?page=dashboard-notifications' ),
+					'meta'   => [
+						'title' => __( 'Notifications', 'agu-dashboard-notifications' ),
+					],
+				]
+			);
+
+			// Link to show notices
+			$show_notices_link = esc_url( add_query_arg( 'show_notices', '1', $_SERVER['REQUEST_URI'] ) );
+
+			$admin_bar->add_menu(
+				[
+					'id'     => 'dashboard-notifications-display',
+					'parent' => 'dashboard-notifications',
+					'title'  => __( 'Display notifications', 'agu-dashboard-notifications' ),
+					'href'   => $show_notices_link,
+					'meta'   => [
+						'title' => __( 'Display notifications', 'agu-dashboard-notifications' ),
+						'class' => 'my_menu_item_class',
+					],
+				]
+			);
 		}
 
 		/**
 		 * Enqueue scripts and styles.
 		 *
-		 * @return void
 		 * @since 1.0.0
+		 * @return void
 		 */
 		function enqueue_custom_scripts() {
 			// Bail, if using the URL parameter.
@@ -155,7 +175,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 
 			// Enqueue script
 			wp_enqueue_script(
-				 self::PLUGIN_SLUG . '-script',
+				self::PLUGIN_SLUG . '-script',
 				plugin_dir_url( __FILE__ ) . 'resources/js/script.js',
 				[],
 				'1.0',
@@ -166,8 +186,8 @@ if ( ! class_exists( 'AGU_Dashboard_Notifications' ) ) {
 		/**
 		 * Return a random item.
 		 *
-		 * @return string
 		 * @since 1.0.0
+		 * @return string
 		 */
 		public function get_random_item() {
 			$items      = [
