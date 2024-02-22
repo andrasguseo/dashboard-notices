@@ -158,8 +158,9 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		 * @return void
 		 */
 		public function admin_notice() {
-			if (
-				$this->in_url_param() === false
+		if (
+				! $this->in_url_param()
+				&& ! $this->is_on_page()
 			) {
 				echo '<div id="notice--dashboard-notifications" class="notice is-dismissible notice--dashboard-notifications"><p>';
 				printf(
