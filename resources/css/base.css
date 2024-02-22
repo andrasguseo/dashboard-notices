@@ -5,9 +5,9 @@
 	border-radius: 50%;
 	padding: 0 5px;
 }
-.dashboard-notifications .wrap .donate {
+.dashboard-notices .wrap .donate {
 	font-style: italic;
 }
-.dashboard-notifications .wrap .donate .emoji {
+.dashboard-notices .wrap .donate .emoji {
 	font-style: normal;
 }

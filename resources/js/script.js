@@ -17,7 +17,7 @@ function updateNotices() {
         document.getElementById('admin-bar-notification-count').innerHTML = num.length;
 
         // Hide "hurray" if there are notices.
-        const onpage = document.querySelector('.dashboard-notifications #content');
+        const onpage = document.querySelector('.dashboard-notices #content');
         if ( onpage != null ) {
             onpage.remove();
         }
@@ -26,7 +26,7 @@ function updateNotices() {
         document.getElementById('notification-count').style.display = 'none';
         // Hide bubble in toolbar.
         document.getElementById('admin-bar-notification-count').style.display = 'none';
-        // Hide "Notifications" notice.
-        document.getElementById('notice--dashboard-notifications').style.display = 'none';
+        // Hide "Notices" notice.
+        document.getElementById('notice--dashboard-notices').style.display = 'none';
     }
 }
