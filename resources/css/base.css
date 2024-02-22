@@ -1,5 +1,5 @@
-#notification-count,
-#admin-bar-notification-count {
+#notice-count,
+#admin-bar-notice-count {
 	background-color: #dc3232;
 	color: #fff;
 	border-radius: 50%;
@@ -11,6 +11,6 @@
 .dashboard-notices .wrap .donate .emoji {
 	font-style: normal;
 }
-body:not(.dashboard-notifications) .wrap > .notice.notice--dashboard-notifications:not(.updated):not(.inline) {
+body:not(.dashboard-notices) .wrap > .notice.notice--dashboard-notices:not(.updated):not(.inline) {
 	display: block;
 }

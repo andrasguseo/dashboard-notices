@@ -50,7 +50,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		 * @return void
 		 */
 		public function add_notices_page() {
-			$page_title = 'Notices <span id="notification-count" class="notification-count">0</span>';
+			$page_title = 'Notices <span id="notice-count" class="notice-count">0</span>';
 
 			add_dashboard_page(
 				'Notices',           // Page title
@@ -120,7 +120,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 				return;
 			}
 
-			$title = '🔔 <span id="admin-bar-notification-count" class="notification-count">0</span>';
+			$title = '🔔 <span id="admin-bar-notice-count" class="notice-count">0</span>';
 			$admin_bar->add_menu(
 				[
 					'id'     => 'dashboard-notices',
@@ -162,9 +162,9 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 				! $this->in_url_param()
 				&& ! $this->is_on_page()
 			) {
-				echo '<div id="notice--dashboard-notifications" class="notice is-dismissible notice--dashboard-notifications"><p>';
+				echo '<div id="notice--dashboard-notices" class="notice is-dismissible notice--dashboard-notices"><p>';
 				printf(
-					esc_html__( 'Your can %1$sfind your notifications here%2$s.', 'agu-dashboard-notifications' ),
+					esc_html__( 'Your can %1$sfind your notices here%2$s.', 'agu-dashboard-notices' ),
 					'<a href="' . admin_url( 'index.php?page=dashboard-notices' ) . '">',
 					'</a>'
 				);
