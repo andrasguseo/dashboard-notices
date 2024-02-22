@@ -31,6 +31,13 @@ I'm always interested in your feedback. The [Issues](https://github.com/andrasgu
 
 == Changelog ==
 
+= [1.1.0] 2024-02-22 =
+
+* Tweak - Renamed the plugin to Dashboard Notices to match the name with what it is handling.
+* Feature - Added an option to the toolbar to show the notices.
+* Feature - Added a dismissible admin notice to show there are notices available. :)
+* Tweak - Various tweaks and code enhancements.
+
 = [1.0.0] 2024-02-14 =
 
 * Initial release
