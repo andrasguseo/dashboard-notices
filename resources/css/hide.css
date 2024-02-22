@@ -1,0 +1,4 @@
+body:not(.dashboard-notices) #wpbody-content > .notice:not(.updated),
+body:not(.dashboard-notices) .wrap > .notice:not(.updated):not(.inline) {
+	display: none;
+}

@@ -1,0 +1,16 @@
+#notice-count,
+#admin-bar-notice-count {
+	background-color: #dc3232;
+	color: #fff;
+	border-radius: 50%;
+	padding: 0 5px;
+}
+.dashboard-notices .wrap .donate {
+	font-style: italic;
+}
+.dashboard-notices .wrap .donate .emoji {
+	font-style: normal;
+}
+body:not(.dashboard-notices) .wrap > .notice.notice--dashboard-notices:not(.updated):not(.inline) {
+	display: block;
+}
