@@ -38,6 +38,8 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 
 			add_action( 'admin_bar_menu', [ $this, 'admin_bar_item' ], 500 );
 
+			add_action( 'admin_notices', [ $this, 'admin_notice' ] );
+
 			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_custom_scripts' ] );
 		}
 
@@ -150,6 +152,26 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		}
 
 		/**
+		 * Add our own admin notice.
+		 *
+		 * @since 1.0.0
+		 * @return void
+		 */
+		public function admin_notice() {
+			if (
+				$this->in_url_param() === false
+			) {
+				echo '<div id="notice--dashboard-notifications" class="notice is-dismissible notice--dashboard-notifications"><p>';
+				printf(
+					esc_html__( 'Your can %1$sfind your notifications here%2$s.', 'agu-dashboard-notifications' ),
+					'<a href="' . admin_url( 'index.php?page=dashboard-notices' ) . '">',
+					'</a>'
+				);
+				echo '</p></div>';
+			}
+		}
+
+		/**
 		 * Enqueue scripts and styles.
 		 *
 		 * @since 1.0.0
@@ -175,10 +197,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 			);
 
 			// Bail, if using the URL parameter.
-			if (
-				isset( $_GET['show_notices'] )
-				&& $_GET['show_notices'] === "1"
-			) {
+			if ( $this->in_url_param() ) {
 				return;
 			}
 
@@ -216,6 +235,23 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 			$random_key = array_rand( $items );
 
 			return $items[ $random_key ];
+		}
+
+		/**
+		 * Check the url parameter value.
+		 *
+		 * @return bool
+		 * @since 1.0.1
+		 */
+		public function in_url_param(){
+			if (
+				isset( $_GET['show_notices'] )
+				&& $_GET['show_notices'] === "1"
+			) {
+				return true;
+			}
+
+			return false;
 		}
 	}
 
