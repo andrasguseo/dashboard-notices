@@ -11,3 +11,6 @@
 .dashboard-notices .wrap .donate .emoji {
 	font-style: normal;
 }
+body:not(.dashboard-notifications) .wrap > .notice.notice--dashboard-notifications:not(.updated):not(.inline) {
+	display: block;
+}
