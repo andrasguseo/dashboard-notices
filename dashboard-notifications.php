@@ -72,7 +72,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 
 			echo '<div class="wrap">';
 			echo '<h2>Notices</h2>';
-			echo '<p id="content">';
+			echo '<p id="hurray">';
 			esc_html_e( 'Hurray, there are no notices! 🎉', 'agu-dashboard-notices' );
 			echo '</p>';
 			echo '<p class="donate">';

@@ -6,18 +6,24 @@ const selectors = [
 ];
 
 function updateNotices() {
+    // Collect notices.
     let num = document.querySelectorAll(selectors.toString());
 
+    // Count how many notices were collected.
+    let numberOfNotices = num.length;
+
     // Need to remove our own.
-    let numberOfNotices = num.length-1;
+    if ( document.getElementById('notice--dashboard-notices') != null ) {
+        numberOfNotices--;
+    }
 
     // Update the number of notices in the bubbles.
-    if (num.length > 0) {
-        document.getElementById('notice-count').innerHTML = num.length;
-        document.getElementById('admin-bar-notice-count').innerHTML = num.length;
+    if (numberOfNotices > 0) {
+        document.getElementById('notice-count').innerHTML = numberOfNotices;
+        document.getElementById('admin-bar-notice-count').innerHTML = numberOfNotices;
 
         // Hide "hurray" if there are notices.
-        const onpage = document.querySelector('.dashboard-notices #content');
+        const onpage = document.querySelector('.dashboard-notices #hurray');
         if ( onpage != null ) {
             onpage.remove();
         }
