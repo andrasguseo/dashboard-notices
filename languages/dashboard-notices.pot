@@ -1,18 +1,16 @@
 # Copyright (C) 2024 Andras Guseo
 # This file is distributed under the GPL version 3 or any later version.
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Dashboard Notices 1.1.1\n"
+"Project-Id-Version: Dashboard Notices 1.2.0\n"
 "Report-Msgid-Bugs-To: https://github.com/andrasguseo/dashboard-notices/issues\n"
-"POT-Creation-Date: 2024-02-23 17:05+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Andras Guseo <andras@guseo.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"POT-Creation-Date: 2024-02-23T16:25:26+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: dashboard-notices\n"
 
 #. Plugin Name of the plugin
