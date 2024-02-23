@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Dashboard Notices
- * Plugin URI:
+ * Plugin URI:        https://andrasguseo.com/dashboard-notices/
  * GitHub Plugin URI: https://github.com/andrasguseo/dashboard-notices
  * Description:       The plugin hides admin notices and shows them only on a dedicated page.
  * Version:           1.1.0

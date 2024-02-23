@@ -1,7 +1,7 @@
 === Dashboard Notices ===
 Contributors: aguseo
 Donate link: https://paypal.me/guseo?country.x=CH&locale.x=en_US
-Tags: notices
+Tags: notices, dashboard, admin
 Requires at least: 5.8.6
 Tested up to: 6.4.3
 Requires PHP: 8.0
