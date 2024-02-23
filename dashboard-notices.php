@@ -1,16 +1,16 @@
 <?php
 /**
  * Plugin Name:       Dashboard Notices
- * Plugin URI:
+ * Plugin URI:        https://andrasguseo.com/dashboard-notices/
  * GitHub Plugin URI: https://github.com/andrasguseo/dashboard-notices
  * Description:       The plugin hides admin notices and shows them only on a dedicated page.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Plugin Class:      AGU_Dashboard_Notices
  * Author:            Andras Guseo
  * Author URI:        https://andrasguseo.com
  * License:           GPL version 3 or any later version
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
- * Text Domain:       agu-dashboard-notices
+ * Text Domain:       dashboard-notices
  *
  *     This plugin is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -32,6 +32,12 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		 * Constructor.
 		 */
 		public function __construct() {
+			require_once( plugin_dir_path( __FILE__ ) . 'vendor/persist-admin-notices-dismissal/persist-admin-notices-dismissal.php' );
+
+			add_action( 'admin_init', [ 'PAnD', 'init' ] );
+
+			add_action( 'admin_init', [ $this, 'plugin_init'] );
+
 			add_action( 'admin_menu', [ $this, 'add_notices_page' ] );
 
 			add_filter( 'admin_body_class', [ $this, 'add_body_class' ] );
@@ -44,16 +50,28 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		}
 
 		/**
+		 * Init.
+		 *
+		 * @since 1.2.0
+		 * @return void
+		 */
+		function plugin_init() {
+			$plugin_rel_path = basename( dirname( __FILE__ ) ) . '/languages';
+			load_plugin_textdomain( 'dashboard-notices', false, $plugin_rel_path );
+		}
+
+		/**
 		 * Add an admin page for notices.
 		 *
 		 * @since 1.0.0
 		 * @return void
 		 */
 		public function add_notices_page() {
-			$page_title = 'Notices <span id="notice-count" class="notice-count">0</span>';
+			$page_title = esc_html_x( 'Notices', 'Admin menu label', 'dashboard-notices' );
+			$page_title .= ' <span id="notice-count" class="notice-count">0</span>';
 
 			add_dashboard_page(
-				'Notices',           // Page title
+				esc_html_x( 'Notices', 'Page title or browser tab title', 'dashboard-notices' ),           // Page title
 				$page_title,           // Menu title
 				'manage_options',          // Capability required
 				'dashboard-notices', // Menu slug
@@ -71,15 +89,16 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 			$item = $this->get_random_item();
 
 			echo '<div class="wrap">';
-			echo '<h2>Notices</h2>';
+			echo '<h2>' . esc_html_x( 'Notices', 'Admin page title', 'dashboard-notices' ) . '</h2>';
 			echo '<p id="hurray">';
-			esc_html_e( 'Hurray, there are no notices! 🎉', 'agu-dashboard-notices' );
+			esc_html_e( 'Hurray, there are no notices! 🎉', 'dashboard-notices' );
 			echo '</p>';
 			echo '<p class="donate">';
 			printf(
+			/* Translators: %1$s: Opening hyperlink tag; %2$s: Closing hyperlink tag; %3$s Food emoji. */
 				esc_html__(
 					'If you find this plugin useful, please consider %1$schipping in%2$s to my %3$s. Thanks!',
-					'agu-dashboard-notices'
+					'dashboard-notices'
 				),
 				'<a href="https://paypal.me/guseo?country.x=CH&locale.x=en_US" target="_blank">',
 				'</a>',
@@ -129,7 +148,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 					'title'  => $title,
 					'href'   => admin_url( 'admin.php?page=dashboard-notices' ),
 					'meta'   => [
-						'title' => __( 'Notices', 'agu-dashboard-notices' ),
+						'title' => esc_html_x( 'Notices', 'Toolbar menu item tooltip', 'dashboard-notices' ),
 					],
 				]
 			);
@@ -141,10 +160,10 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 				[
 					'id'     => 'dashboard-notices-display',
 					'parent' => 'dashboard-notices',
-					'title'  => __( 'Display notices', 'agu-dashboard-notices' ),
+					'title'  => esc_html_x( 'Display notices', 'Toolbar menu item label' ,'dashboard-notices' ),
 					'href'   => $show_notices_link,
 					'meta'   => [
-						'title' => __( 'Display notices', 'agu-dashboard-notices' ),
+						'title' => esc_html_x( 'Display notices', 'Toolbar menu item tooltip', 'dashboard-notices' ),
 						'class' => 'my_menu_item_class',
 					],
 				]
@@ -158,17 +177,45 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		 * @return void
 		 */
 		public function admin_notice() {
+			$dismiss_slug = 'notice-one-' . $this->dismiss_notice_days();
+
+			// Bail, if notice is on dismiss.
+			if ( ! PAnD::is_admin_notice_active( $dismiss_slug ) ) {
+				return;
+			}
+
 			if (
 				! $this->in_url_param()
 				&& ! $this->is_on_page()
 			) {
-				echo '<div id="notice--dashboard-notices" class="notice is-dismissible notice--dashboard-notices"><p>';
+				if ( $this->dismiss_notice_days() === 'forever' ) {
+					$dismiss_text = esc_html__(
+						'Dismiss for forever', 'dashboard-notices'
+					);
+				} else {
+					$dismiss_text = sprintf(
+						esc_html(
+							_n(
+								'Dismiss for %d day',
+								'Dismiss for %d days',
+								$this->dismiss_notice_days(),
+								'dashboard-notices'
+							)
+						),
+						$this->dismiss_notice_days()
+					);
+				}
+
+				echo '<div data-dismissible="' . $dismiss_slug . '" id="notice--dashboard-notices" class="notice is-dismissible notice--dashboard-notices"><p>';
 				printf(
-					esc_html__( 'Your can %1$sfind your notices here%2$s.', 'agu-dashboard-notices' ),
+					/* Translators: %1$s: Opening hyperlink tag; %2$s: Closing hyperlink tag. */
+					esc_html__( 'Your can %1$sfind your notices here%2$s.', 'dashboard-notices' ),
 					'<a href="' . admin_url( 'index.php?page=dashboard-notices' ) . '">',
 					'</a>'
 				);
-				echo '</p></div>';
+				echo '<span style="float:right">';
+				echo $dismiss_text;
+				echo ' →</span></p></div>';
 			}
 		}
 
@@ -270,6 +317,22 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 			}
 
 			return false;
+		}
+
+		/**
+		 * The number of days the notice should sleep.
+		 *
+		 * @since 1.2.0
+		 * @return int
+		 */
+		public function dismiss_notice_days() {
+			$days = (int) apply_filters( 'agu_dashboard_notices_dismiss_notice_days', 7 );
+
+			if ( $days === 0 ) {
+				return 'forever';
+			}
+
+			return $days;
 		}
 	}
 

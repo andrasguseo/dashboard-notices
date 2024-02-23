@@ -1,11 +1,11 @@
 === Dashboard Notices ===
 Contributors: aguseo
 Donate link: https://paypal.me/guseo?country.x=CH&locale.x=en_US
-Tags: notices
+Tags: notices, dashboard, admin
 Requires at least: 5.8.6
 Tested up to: 6.4.3
 Requires PHP: 8.0
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -34,6 +34,12 @@ Dashboard Notices tries its best to hide admin notices that were created by usin
 I'm always interested in your feedback. The [Issues](https://github.com/andrasguseo/dashboard-notices/issues) section of the repository is the best place to flag any issues. Do note, however, that the degree of support I provide tends to be very limited.
 
 == Changelog ==
+
+= [1.2.0] 2024-02-23 =
+
+* Feature - Ensure the admin notice stays dismissed.
+* Feature - Added the `agu_dashboard_notices_dismiss_notice_days` filter to change the number of days the notice should stay dismissed.
+* Feature - Make the plugin translatable.
 
 = [1.1.0] 2024-02-22 =
 

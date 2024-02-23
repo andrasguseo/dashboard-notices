@@ -1,0 +1,88 @@
+# Copyright (C) 2024 Andras Guseo
+# This file is distributed under the GPL version 3 or any later version.
+msgid ""
+msgstr ""
+"Project-Id-Version: Dashboard Notices 1.2.0\n"
+"Report-Msgid-Bugs-To: https://github.com/andrasguseo/dashboard-notices/issues\n"
+"Language-Team: Andras Guseo <andras@guseo.hu>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-02-23T16:25:26+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: dashboard-notices\n"
+
+#. Plugin Name of the plugin
+msgid "Dashboard Notices"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://andrasguseo.com/dashboard-notices/"
+msgstr ""
+
+#. Description of the plugin
+msgid "The plugin hides admin notices and shows them only on a dedicated page."
+msgstr ""
+
+#. Author of the plugin
+msgid "Andras Guseo"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://andrasguseo.com"
+msgstr ""
+
+#: dashboard-notices.php:70
+msgctxt "Admin menu label"
+msgid "Notices"
+msgstr ""
+
+#: dashboard-notices.php:74
+msgctxt "Page title or browser tab title"
+msgid "Notices"
+msgstr ""
+
+#: dashboard-notices.php:92
+msgctxt "Admin page title"
+msgid "Notices"
+msgstr ""
+
+#: dashboard-notices.php:94
+msgid "Hurray, there are no notices! 🎉"
+msgstr ""
+
+#. Translators: %1$s: Opening hyperlink tag; %2$s: Closing hyperlink tag; %3$s Food emoji.
+#: dashboard-notices.php:99
+msgid "If you find this plugin useful, please consider %1$schipping in%2$s to my %3$s. Thanks!"
+msgstr ""
+
+#: dashboard-notices.php:151
+msgctxt "Toolbar menu item tooltip"
+msgid "Notices"
+msgstr ""
+
+#: dashboard-notices.php:163
+msgctxt "Toolbar menu item label"
+msgid "Display notices"
+msgstr ""
+
+#: dashboard-notices.php:166
+msgctxt "Toolbar menu item tooltip"
+msgid "Display notices"
+msgstr ""
+
+#: dashboard-notices.php:192
+msgid "Dismiss for forever"
+msgstr ""
+
+#: dashboard-notices.php:198
+msgid "Dismiss for %d day"
+msgid_plural "Dismiss for %d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Translators: %1$s: Opening hyperlink tag; %2$s: Closing hyperlink tag.
+#: dashboard-notices.php:212
+msgid "Your can %1$sfind your notices here%2$s."
+msgstr ""
