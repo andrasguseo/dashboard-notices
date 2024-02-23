@@ -32,6 +32,10 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		 * Constructor.
 		 */
 		public function __construct() {
+			require_once( plugin_dir_path( __FILE__ ) . 'vendor/persist-admin-notices-dismissal/persist-admin-notices-dismissal.php' );
+
+			add_action( 'admin_init', [ 'PAnD', 'init' ] );
+
 			add_action( 'admin_menu', [ $this, 'add_notices_page' ] );
 
 			add_filter( 'admin_body_class', [ $this, 'add_body_class' ] );
@@ -158,17 +162,24 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		 * @return void
 		 */
 		public function admin_notice() {
+			$dismiss_slug = 'notice-one-' . $this->dismiss_notice_days();
+
+			// Bail, if notice is on dismiss.
+			if ( ! PAnD::is_admin_notice_active( $dismiss_slug ) ) {
+				return;
+			}
+
 			if (
 				! $this->in_url_param()
 				&& ! $this->is_on_page()
 			) {
-				echo '<div id="notice--dashboard-notices" class="notice is-dismissible notice--dashboard-notices"><p>';
+				echo '<div data-dismissible="' . $dismiss_slug . '" id="notice--dashboard-notices" class="notice is-dismissible notice--dashboard-notices"><p>';
 				printf(
 					esc_html__( 'Your can %1$sfind your notices here%2$s.', 'agu-dashboard-notices' ),
 					'<a href="' . admin_url( 'index.php?page=dashboard-notices' ) . '">',
 					'</a>'
 				);
-				echo '</p></div>';
+				echo '<span style="float:right">Dismiss for 7 days →</span></p></div>';
 			}
 		}
 
@@ -270,6 +281,16 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 			}
 
 			return false;
+		}
+
+		/**
+		 * The number of days the notice should sleep.
+		 *
+		 * @since 1.1.1
+		 * @return int
+		 */
+		public function dismiss_notice_days() {
+			return (int) apply_filters( 'agu_dashboard_notices_dismiss_notice_days', 7 );
 		}
 	}
 
