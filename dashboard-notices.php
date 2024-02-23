@@ -36,6 +36,8 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 
 			add_action( 'admin_init', [ 'PAnD', 'init' ] );
 
+			add_action( 'plugins_loaded', [ $this, 'plugin_init'] );
+
 			add_action( 'admin_menu', [ $this, 'add_notices_page' ] );
 
 			add_filter( 'admin_body_class', [ $this, 'add_body_class' ] );
@@ -45,6 +47,17 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 			add_action( 'admin_notices', [ $this, 'admin_notice' ] );
 
 			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_custom_scripts' ] );
+		}
+
+		/**
+		 * Init.
+		 *
+		 * @since 1.1.1
+		 * @return void
+		 */
+		function plugin_init() {
+			$plugin_rel_path = basename( dirname( __FILE__ ) ) . '/languages';
+			load_plugin_textdomain( 'agu-dashboard-notices', false, $plugin_rel_path );
 		}
 
 		/**
@@ -81,8 +94,8 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 			esc_html_e( 'Hurray, there are no notices! 🎉', 'agu-dashboard-notices' );
 			echo '</p>';
 			echo '<p class="donate">';
-			/* translators: 1) Opening hyperlink tag; 2) closing hyperlink tag; 3) emoji. */
 			printf(
+			/* Translators: %1$s: Opening hyperlink tag; %2$s: Closing hyperlink tag; %3$s Food emoji. */
 				esc_html__(
 					'If you find this plugin useful, please consider %1$schipping in%2$s to my %3$s. Thanks!',
 					'agu-dashboard-notices'
@@ -195,6 +208,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 
 				echo '<div data-dismissible="' . $dismiss_slug . '" id="notice--dashboard-notices" class="notice is-dismissible notice--dashboard-notices"><p>';
 				printf(
+					/* Translators: %1$s: Opening hyperlink tag; %2$s: Closing hyperlink tag. */
 					esc_html__( 'Your can %1$sfind your notices here%2$s.', 'agu-dashboard-notices' ),
 					'<a href="' . admin_url( 'index.php?page=dashboard-notices' ) . '">',
 					'</a>'
