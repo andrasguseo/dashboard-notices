@@ -173,13 +173,33 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 				! $this->in_url_param()
 				&& ! $this->is_on_page()
 			) {
+				if ( $this->dismiss_notice_days() === 'forever' ) {
+					$dismiss_text = esc_html__(
+						'Dismiss for forever', 'agu-dashboard-notices'
+					);
+				} else {
+					$dismiss_text = sprintf(
+						esc_html(
+							_n(
+								'Dismiss for %d day',
+								'Dismiss for %d days',
+								$this->dismiss_notice_days(),
+								'agu-dashboard-notices'
+							)
+						),
+						$this->dismiss_notice_days()
+					);
+				}
+
 				echo '<div data-dismissible="' . $dismiss_slug . '" id="notice--dashboard-notices" class="notice is-dismissible notice--dashboard-notices"><p>';
 				printf(
 					esc_html__( 'Your can %1$sfind your notices here%2$s.', 'agu-dashboard-notices' ),
 					'<a href="' . admin_url( 'index.php?page=dashboard-notices' ) . '">',
 					'</a>'
 				);
-				echo '<span style="float:right">Dismiss for 7 days →</span></p></div>';
+				echo '<span style="float:right">';
+				echo $dismiss_text;
+				echo ' →</span></p></div>';
 			}
 		}
 
@@ -291,10 +311,11 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		 */
 		public function dismiss_notice_days() {
 			$days = (int) apply_filters( 'agu_dashboard_notices_dismiss_notice_days', 7 );
-
+			
 			if ( $days === 0 ) {
-				return "forever";
+				return 'forever';
 			}
+
 			return $days;
 		}
 	}
