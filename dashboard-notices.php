@@ -54,10 +54,11 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		 * @return void
 		 */
 		public function add_notices_page() {
-			$page_title = 'Notices <span id="notice-count" class="notice-count">0</span>';
+			$page_title = esc_html_x( 'Notices', 'Admin menu label', 'agu-dashboard-notices' );
+			$page_title .= ' <span id="notice-count" class="notice-count">0</span>';
 
 			add_dashboard_page(
-				'Notices',           // Page title
+				esc_html_x( 'Notices', 'Page title or browser tab title', 'agu-dashboard-notices' ),           // Page title
 				$page_title,           // Menu title
 				'manage_options',          // Capability required
 				'dashboard-notices', // Menu slug
@@ -75,11 +76,12 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 			$item = $this->get_random_item();
 
 			echo '<div class="wrap">';
-			echo '<h2>Notices</h2>';
+			echo '<h2>' . esc_html_x( 'Notices', 'Admin page title', 'agu-dashboard-notices' ) . '</h2>';
 			echo '<p id="hurray">';
 			esc_html_e( 'Hurray, there are no notices! 🎉', 'agu-dashboard-notices' );
 			echo '</p>';
 			echo '<p class="donate">';
+			/* translators: 1) Opening hyperlink tag; 2) closing hyperlink tag; 3) emoji. */
 			printf(
 				esc_html__(
 					'If you find this plugin useful, please consider %1$schipping in%2$s to my %3$s. Thanks!',
@@ -133,7 +135,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 					'title'  => $title,
 					'href'   => admin_url( 'admin.php?page=dashboard-notices' ),
 					'meta'   => [
-						'title' => __( 'Notices', 'agu-dashboard-notices' ),
+						'title' => esc_html_x( 'Notices', 'Toolbar menu item tooltip', 'agu-dashboard-notices' ),
 					],
 				]
 			);
@@ -145,10 +147,10 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 				[
 					'id'     => 'dashboard-notices-display',
 					'parent' => 'dashboard-notices',
-					'title'  => __( 'Display notices', 'agu-dashboard-notices' ),
+					'title'  => esc_html_x( 'Display notices', 'Toolbar menu item label' ,'agu-dashboard-notices' ),
 					'href'   => $show_notices_link,
 					'meta'   => [
-						'title' => __( 'Display notices', 'agu-dashboard-notices' ),
+						'title' => esc_html_x( 'Display notices', 'Toolbar menu item tooltip', 'agu-dashboard-notices' ),
 						'class' => 'my_menu_item_class',
 					],
 				]
@@ -311,7 +313,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		 */
 		public function dismiss_notice_days() {
 			$days = (int) apply_filters( 'agu_dashboard_notices_dismiss_notice_days', 7 );
-			
+
 			if ( $days === 0 ) {
 				return 'forever';
 			}
