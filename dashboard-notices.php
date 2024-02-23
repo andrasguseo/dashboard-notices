@@ -290,7 +290,12 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		 * @return int
 		 */
 		public function dismiss_notice_days() {
-			return (int) apply_filters( 'agu_dashboard_notices_dismiss_notice_days', 7 );
+			$days = (int) apply_filters( 'agu_dashboard_notices_dismiss_notice_days', 7 );
+
+			if ( $days === 0 ) {
+				return "forever";
+			}
+			return $days;
 		}
 	}
 
