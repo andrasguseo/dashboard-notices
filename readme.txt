@@ -35,6 +35,12 @@ I'm always interested in your feedback. The [Issues](https://github.com/andrasgu
 
 == Changelog ==
 
+= [1.2.0] 2024-02-23 =
+
+* Feature - Ensure the admin notice stays dismissed.
+* Feature - Added the `agu_dashboard_notices_dismiss_notice_days` filter to change the number of days the notice should stay dismissed.
+* Feature - Make the plugin translatable.
+
 = [1.1.0] 2024-02-22 =
 
 * Tweak - Renamed the plugin to Dashboard Notices to match the name with what it is handling.
