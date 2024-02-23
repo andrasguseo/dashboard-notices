@@ -4,7 +4,7 @@
  * Plugin URI:        https://andrasguseo.com/dashboard-notices/
  * GitHub Plugin URI: https://github.com/andrasguseo/dashboard-notices
  * Description:       The plugin hides admin notices and shows them only on a dedicated page.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Plugin Class:      AGU_Dashboard_Notices
  * Author:            Andras Guseo
  * Author URI:        https://andrasguseo.com
@@ -52,7 +52,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		/**
 		 * Init.
 		 *
-		 * @since 1.1.1
+		 * @since 1.2.0
 		 * @return void
 		 */
 		function plugin_init() {
@@ -322,7 +322,7 @@ if ( ! class_exists( 'AGU_Dashboard_Notices' ) ) {
 		/**
 		 * The number of days the notice should sleep.
 		 *
-		 * @since 1.1.1
+		 * @since 1.2.0
 		 * @return int
 		 */
 		public function dismiss_notice_days() {
